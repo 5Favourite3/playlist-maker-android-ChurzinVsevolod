@@ -22,8 +22,11 @@ class SearchFeatureTest {
     @Test
     fun `storage filters tracks case insensitively by trackName and artistName`() {
         val storage = Storage()
-        val kinoResults = storage.search("kInO")
+        val kinoResults = storage.search("кИнО")
         assertEquals(2, kinoResults.size)
+
+        val beatlesResults = storage.search("the beatles")
+        assertEquals(5, beatlesResults.size)
 
         val nirvanaResults = storage.search("smells like")
         assertEquals(1, nirvanaResults.size)
@@ -36,7 +39,7 @@ class SearchFeatureTest {
             networkClient = RetrofitNetworkClient(Storage()),
             simulatedDelayMs = 0L
         )
-        val results = repository.searchTracks("Vladivostok")
+        val results = repository.searchTracks("Владивосток")
         assertEquals(1, results.size)
         assertEquals("02:38", results.first().trackTime)
     }
@@ -68,7 +71,7 @@ class SearchFeatureTest {
 
         assertTrue(viewModel.searchScreenState.value is SearchState.Initial)
 
-        viewModel.search("Kino")
+        viewModel.search("Кино")
         testScheduler.advanceUntilIdle()
 
         val state = viewModel.searchScreenState.value

@@ -6,32 +6,32 @@ class Storage {
     private val listTracks = listOf(
         TrackDto(
             id = "1",
-            trackName = "Vladivostok 2000",
-            artistName = "Mumiy Troll",
+            trackName = "Владивосток 2000",
+            artistName = "Мумий Тролль",
             trackTimeMillis = 158000
         ),
         TrackDto(
             id = "2",
-            trackName = "Gruppa krovi",
-            artistName = "Kino",
+            trackName = "Группа крови",
+            artistName = "Кино",
             trackTimeMillis = 283000
         ),
         TrackDto(
             id = "3",
-            trackName = "Ne smotri nazad",
-            artistName = "Aria",
+            trackName = "Не смотри назад",
+            artistName = "Ария",
             trackTimeMillis = 312000
         ),
         TrackDto(
             id = "4",
-            trackName = "Zvezda po imeni Solntse",
-            artistName = "Kino",
+            trackName = "Звезда по имени Солнце",
+            artistName = "Кино",
             trackTimeMillis = 225000
         ),
         TrackDto(
             id = "5",
-            trackName = "Lantsety",
-            artistName = "B-2",
+            trackName = "Ланцеты",
+            artistName = "Би-2",
             trackTimeMillis = 256000
         ),
         TrackDto(
@@ -63,6 +63,36 @@ class Storage {
             trackName = "Sweet Child O'Mine",
             artistName = "Guns N' Roses",
             trackTimeMillis = 303000
+        ),
+        TrackDto(
+            id = "11",
+            trackName = "Here Comes The Sun",
+            artistName = "The Beatles",
+            trackTimeMillis = 185000
+        ),
+        TrackDto(
+            id = "12",
+            trackName = "Yesterday",
+            artistName = "The Beatles",
+            trackTimeMillis = 125000
+        ),
+        TrackDto(
+            id = "13",
+            trackName = "Let It Be",
+            artistName = "The Beatles",
+            trackTimeMillis = 243000
+        ),
+        TrackDto(
+            id = "14",
+            trackName = "Hey Jude",
+            artistName = "The Beatles",
+            trackTimeMillis = 431000
+        ),
+        TrackDto(
+            id = "15",
+            trackName = "Come Together",
+            artistName = "The Beatles",
+            trackTimeMillis = 259000
         )
     )
 
