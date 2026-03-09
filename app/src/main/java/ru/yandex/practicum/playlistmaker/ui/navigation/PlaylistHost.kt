@@ -1,13 +1,37 @@
 package ru.yandex.practicum.playlistmaker.ui.navigation
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import ru.yandex.practicum.playlistmaker.R
 import ru.yandex.practicum.playlistmaker.ui.main.MainScreen
 import ru.yandex.practicum.playlistmaker.ui.search.DetailsScreen
 import ru.yandex.practicum.playlistmaker.ui.search.SearchScreen
@@ -24,6 +48,14 @@ fun PlaylistHost(
 
     fun navigateToSearch() {
         navController.navigate(Screen.SEARCH.route)
+    }
+
+    fun navigateToPlaylists() {
+        navController.navigate(Screen.PLAYLISTS.route)
+    }
+
+    fun navigateToFavorites() {
+        navController.navigate(Screen.FAVORITES.route)
     }
 
     fun navigateToSettings() {
@@ -45,6 +77,8 @@ fun PlaylistHost(
         composable(Screen.MAIN.route) {
             MainScreen(
                 onSearchClick = ::navigateToSearch,
+                onPlaylistsClick = ::navigateToPlaylists,
+                onFavoritesClick = ::navigateToFavorites,
                 onSettingsClick = ::navigateToSettings
             )
         }
@@ -58,6 +92,20 @@ fun PlaylistHost(
                 }
             )
         }
+        composable(Screen.PLAYLISTS.route) {
+            PlaceholderSectionScreen(
+                title = stringResource(id = R.string.playlists),
+                emptyMessage = stringResource(id = R.string.nothing_found),
+                onBackClick = ::navigateBack
+            )
+        }
+        composable(Screen.FAVORITES.route) {
+            PlaceholderSectionScreen(
+                title = stringResource(id = R.string.favorites),
+                emptyMessage = stringResource(id = R.string.nothing_found),
+                onBackClick = ::navigateBack
+            )
+        }
         composable(Screen.SETTINGS.route) {
             SettingsScreen(
                 onBackClick = ::navigateBack
@@ -68,6 +116,53 @@ fun PlaylistHost(
             DetailsScreen(
                 track = selectedTrack,
                 onBackClick = ::navigateBack
+            )
+        }
+    }
+}
+
+@Composable
+private fun PlaceholderSectionScreen(
+    title: String,
+    emptyMessage: String,
+    onBackClick: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(dimensionResource(id = R.dimen.toolbar_height))
+                .padding(horizontal = dimensionResource(id = R.dimen.padding_standard)),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_arrow_back),
+                contentDescription = stringResource(id = R.string.back),
+                modifier = Modifier
+                    .size(dimensionResource(id = R.dimen.icon_size))
+                    .clickable(onClick = onBackClick),
+                tint = MaterialTheme.colorScheme.onBackground
+            )
+            Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.padding_large)))
+            Text(
+                text = title,
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Medium,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+        }
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = emptyMessage,
+                color = colorResource(id = R.color.yp_text_gray),
+                fontSize = 18.sp
             )
         }
     }
